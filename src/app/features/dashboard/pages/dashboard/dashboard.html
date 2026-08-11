@@ -1,0 +1,52 @@
+<div class="dashboard">
+
+  <header class="dashboard-header">
+
+    <div>
+      <h1>NeoArchiveAI</h1>
+      <p>Intelligent Document Management</p>
+    </div>
+
+    <button type="button" (click)="logout()">
+      Logout
+    </button>
+
+  </header>
+
+  <main class="dashboard-content">
+
+    <section class="welcome-card">
+
+      <h2>
+        Welcome back,
+        {{ currentUser()?.firstName }}
+      </h2>
+
+      <p>
+        {{ currentUser()?.email }}
+      </p>
+
+    </section>
+
+    <section class="dashboard-grid">
+
+      <article class="dashboard-card">
+        <h3>Documents</h3>
+        <p>Manage your documents.</p>
+      </article>
+
+      <article class="dashboard-card">
+        <h3>Categories</h3>
+        <p>Organize your documents.</p>
+      </article>
+
+      <article class="dashboard-card">
+        <h3>AI Analysis</h3>
+        <p>Analyze documents with AI.</p>
+      </article>
+
+    </section>
+
+  </main>
+
+</div>

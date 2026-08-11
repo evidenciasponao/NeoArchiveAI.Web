@@ -1,0 +1,51 @@
+<div class="documents-page">
+
+  <header class="documents-header">
+    <div>
+      <h1>Documents</h1>
+      <p>Manage your documents in NeoArchiveAI.</p>
+    </div>
+
+    <button type="button">
+      Upload Document
+    </button>
+  </header>
+
+  <section class="documents-content">
+
+    @if (isLoading()) {
+      <p>Loading documents...</p>
+    }
+
+    @else if (documents().length === 0) {
+      <div class="empty-state">
+        <h2>No documents found</h2>
+        <p>You don't have any documents yet.</p>
+      </div>
+    }
+
+    @else {
+      <div class="documents-grid">
+
+        @for (document of documents(); track document.id) {
+          <article class="document-card">
+
+            <h2>{{ document.title }}</h2>
+
+            <p>
+              {{ document.fileName }}
+            </p>
+
+            <span>
+              {{ document.extension }}
+            </span>
+
+          </article>
+        }
+
+      </div>
+    }
+
+  </section>
+
+</div>
