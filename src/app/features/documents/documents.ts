@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 
 import { Document } from '../../core/models/document.model';
 import { DocumentService } from '../../core/services/document.service';

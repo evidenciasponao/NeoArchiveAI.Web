@@ -1,4 +1,4 @@
-<div class="documents-page">
+<section class="documents-page">
 
   <header class="documents-header">
     <div>
@@ -11,41 +11,48 @@
     </button>
   </header>
 
-  <section class="documents-content">
+  @if (isLoading()) {
 
-    @if (isLoading()) {
-      <p>Loading documents...</p>
-    }
+    <div class="state-message">
+      Loading documents...
+    </div>
 
-    @else if (documents().length === 0) {
-      <div class="empty-state">
-        <h2>No documents found</h2>
-        <p>You don't have any documents yet.</p>
-      </div>
-    }
+  } @else if (errorMessage()) {
 
-    @else {
-      <div class="documents-grid">
+    <div class="state-message error">
+      {{ errorMessage() }}
+    </div>
 
-        @for (document of documents(); track document.id) {
-          <article class="document-card">
+  } @else if (documents().length === 0) {
 
-            <h2>{{ document.title }}</h2>
+    <div class="state-message">
+      No documents found.
+    </div>
 
-            <p>
-              {{ document.fileName }}
-            </p>
+  } @else {
 
-            <span>
-              {{ document.extension }}
-            </span>
+    <div class="documents-grid">
 
-          </article>
-        }
+      @for (document of documents(); track document.id) {
 
-      </div>
-    }
+        <article class="document-card">
 
-  </section>
+          <h2>{{ document.title }}</h2>
 
-</div>
+          <p class="file-name">
+            {{ document.fileName }}
+          </p>
+
+          <span class="extension">
+            {{ document.extension }}
+          </span>
+
+        </article>
+
+      }
+
+    </div>
+
+  }
+
+</section>
