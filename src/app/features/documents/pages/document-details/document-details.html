@@ -1,0 +1,163 @@
+<section class="document-details-page">
+
+  <header class="document-details-header">
+
+    <div>
+      <h1>Document Details</h1>
+      <p>View information about your document.</p>
+    </div>
+
+    <a
+      routerLink="/documents"
+      class="back-button">
+      Back to Documents
+    </a>
+
+  </header>
+
+  @if (isLoading) {
+
+    <div class="state-card">
+      <p>Loading document...</p>
+    </div>
+
+  } @else if (document) {
+
+    <article class="document-card">
+
+      <div class="document-card-header">
+
+        <div>
+          <h2>{{ document.title }}</h2>
+
+          <p>
+            {{ document.fileName }}
+          </p>
+        </div>
+
+        <span class="document-extension">
+          {{ document.extension }}
+        </span>
+
+      </div>
+
+
+      <div class="document-info-grid">
+
+        <div class="info-item">
+          <span class="info-label">Description</span>
+
+          <span class="info-value">
+            {{ document.description }}
+          </span>
+        </div>
+
+
+        <div class="info-item">
+          <span class="info-label">File name</span>
+
+          <span class="info-value">
+            {{ document.fileName }}
+          </span>
+        </div>
+
+
+        <div class="info-item">
+          <span class="info-label">Extension</span>
+
+          <span class="info-value">
+            {{ document.extension }}
+          </span>
+        </div>
+
+
+        <div class="info-item">
+          <span class="info-label">MIME type</span>
+
+          <span class="info-value">
+            {{ document.mimeType }}
+          </span>
+        </div>
+
+
+        <div class="info-item">
+          <span class="info-label">Size</span>
+
+          <span class="info-value">
+            {{ document.size }} bytes
+          </span>
+        </div>
+
+
+        <div class="info-item">
+          <span class="info-label">Category ID</span>
+
+          <span class="info-value">
+            {{ document.categoryId }}
+          </span>
+        </div>
+
+
+        <div class="info-item">
+          <span class="info-label">Uploaded by</span>
+
+          <span class="info-value">
+            {{ document.uploadedBy }}
+          </span>
+        </div>
+
+
+        <div class="info-item">
+          <span class="info-label">Document ID</span>
+
+          <span class="info-value document-id">
+            {{ document.id }}
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="document-metadata">
+
+        <div>
+          <span class="info-label">Storage path</span>
+
+          <span class="metadata-value">
+            {{ document.storagePath }}
+          </span>
+        </div>
+
+        <div>
+          <span class="info-label">Hash</span>
+
+          <span class="metadata-value">
+            {{ document.hash }}
+          </span>
+        </div>
+
+      </div>
+
+    </article>
+
+  } @else {
+
+    <div class="state-card error-state">
+
+      <h2>Document not found</h2>
+
+      <p>
+        The requested document could not be loaded.
+      </p>
+
+      <a
+        routerLink="/documents"
+        class="back-button">
+        Back to Documents
+      </a>
+
+    </div>
+
+  }
+
+</section>

@@ -17,4 +17,8 @@ export class DocumentService {
   getDocuments(): Observable<Document[]> {
     return this.http.get<Document[]>(this.apiUrl);
   }
+
+  getDocumentById(id: string): Observable<Document> {
+    return this.http.get<Document>(`${this.apiUrl}/${id}`);
+  }
 }

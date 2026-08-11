@@ -35,8 +35,10 @@
 
       @for (document of documents(); track document.id) {
 
-        <article class="document-card">
-
+        <a
+          class="document-card"
+          [routerLink]="['/documents', document.id]"
+        >
           <h2>{{ document.title }}</h2>
 
           <p class="file-name">
@@ -46,8 +48,7 @@
           <span class="extension">
             {{ document.extension }}
           </span>
-
-        </article>
+        </a>
 
       }
 

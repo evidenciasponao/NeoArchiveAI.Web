@@ -39,9 +39,20 @@
 }
 
 .document-card {
+  display: block;
   padding: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
 
   h2 {
     margin: 0 0 0.75rem;
@@ -70,4 +81,15 @@
 
 .state-message.error {
   opacity: 1;
+}
+
+@media (max-width: 700px) {
+  .documents-page {
+    padding: 1.25rem;
+  }
+
+  .documents-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }

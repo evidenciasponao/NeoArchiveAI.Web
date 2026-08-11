@@ -28,6 +28,14 @@ export const routes: Routes = [
   },
 
   {
+  path: 'documents/:id',
+  canActivate: [authGuard],
+  loadComponent: () =>
+    import('./features/documents/pages/document-details/document-details')
+      .then(m => m.DocumentDetails),
+  },
+
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'

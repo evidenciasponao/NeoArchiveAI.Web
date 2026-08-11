@@ -74,25 +74,49 @@
   gap: 24px;
 }
 
+/* Dashboard navigation cards */
+
 .dashboard-card {
+  display: block;
+
   padding: 24px;
 
   background: #1e293b;
+  color: #ffffff;
 
   border: 1px solid #334155;
   border-radius: 12px;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+
+  cursor: pointer;
+}
+
+.dashboard-card:hover {
+  background: #263449;
+  border-color: #2563eb;
+
+  transform: translateY(-2px);
 }
 
 .dashboard-card h3 {
   margin-top: 0;
+
+  color: #ffffff;
 }
 
 .dashboard-card p {
   color: #94a3b8;
 }
 
-@media (max-width: 768px) {
+/* Mobile */
 
+@media (max-width: 768px) {
   .dashboard-header {
     padding: 20px;
   }
@@ -104,5 +128,4 @@
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
-
 }
