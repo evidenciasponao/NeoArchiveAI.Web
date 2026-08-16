@@ -1,11 +1,12 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { Document } from '../../core/models/document.model';
 import { DocumentService } from '../../core/services/document.service';
 
 @Component({
   selector: 'app-documents',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './documents.html',
   styleUrl: './documents.scss'
 })

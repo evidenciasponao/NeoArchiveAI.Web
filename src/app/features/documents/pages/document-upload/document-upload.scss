@@ -1,0 +1,218 @@
+.upload-page {
+  min-height: 100vh;
+  background: #0f172a;
+  color: #ffffff;
+}
+
+
+.upload-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 24px 40px;
+
+  background: #111827;
+  border-bottom: 1px solid #1f2937;
+}
+
+
+.upload-header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+
+.upload-header p {
+  margin: 6px 0 0;
+  color: #94a3b8;
+}
+
+
+.upload-content {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+
+.upload-card {
+  width: 100%;
+  max-width: 800px;
+
+  padding: 32px;
+
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+}
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 24px;
+}
+
+
+.form-group label {
+  margin-bottom: 8px;
+
+  color: #cbd5e1;
+
+  font-weight: 600;
+}
+
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 12px 14px;
+
+  border: 1px solid #475569;
+  border-radius: 6px;
+
+  background: #0f172a;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 15px;
+
+  outline: none;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #2563eb;
+}
+
+
+.form-group textarea {
+  resize: vertical;
+}
+
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #64748b;
+}
+
+
+.selected-file {
+  margin-bottom: 24px;
+
+  padding: 14px 16px;
+
+  background: #172033;
+  border: 1px solid #334155;
+  border-radius: 6px;
+
+  color: #94a3b8;
+}
+
+
+.selected-file strong {
+  color: #ffffff;
+}
+
+
+.error-message {
+  margin-bottom: 24px;
+
+  padding: 14px 16px;
+
+  background: #3f1d1d;
+  border: 1px solid #7f1d1d;
+  border-radius: 6px;
+
+  color: #fecaca;
+}
+
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+
+  margin-top: 32px;
+}
+
+
+.primary-button,
+.secondary-button {
+  padding: 10px 18px;
+
+  border: none;
+  border-radius: 6px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+.primary-button {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+
+.primary-button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+
+.primary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+.secondary-button {
+  background: #334155;
+  color: #ffffff;
+}
+
+
+.secondary-button:hover {
+  background: #475569;
+}
+
+
+@media (max-width: 768px) {
+
+  .upload-header {
+    padding: 20px;
+
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 20px;
+  }
+
+
+  .upload-content {
+    padding: 20px;
+  }
+
+
+  .upload-card {
+    padding: 24px;
+  }
+
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+
+  .primary-button,
+  .secondary-button {
+    width: 100%;
+  }
+
+}

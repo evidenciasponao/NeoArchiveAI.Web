@@ -1,15 +1,21 @@
 <section class="documents-page">
 
   <header class="documents-header">
+
     <div>
       <h1>Documents</h1>
       <p>Manage your documents in NeoArchiveAI.</p>
     </div>
 
-    <button type="button">
+    <button
+      type="button"
+      routerLink="/documents/upload"
+    >
       Upload Document
     </button>
+
   </header>
+
 
   @if (isLoading()) {
 
@@ -35,9 +41,14 @@
 
       @for (document of documents(); track document.id) {
 
-        <article class="document-card">
+        <a
+          class="document-card"
+          [routerLink]="['/documents', document.id]"
+        >
 
-          <h2>{{ document.title }}</h2>
+          <h2>
+            {{ document.title }}
+          </h2>
 
           <p class="file-name">
             {{ document.fileName }}
@@ -47,7 +58,7 @@
             {{ document.extension }}
           </span>
 
-        </article>
+        </a>
 
       }
 

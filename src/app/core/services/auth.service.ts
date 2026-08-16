@@ -12,7 +12,7 @@ import {
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly apiUrl = 'http://localhost:5263/api/auth';
+  private readonly apiUrl = 'http://192.168.1.28:5263/api/auth';
 
   private readonly tokenKey = 'neoarchive_access_token';
   private readonly userKey = 'neoarchive_user';

@@ -1,0 +1,150 @@
+<div class="upload-page">
+
+  <header class="upload-header">
+
+    <div>
+      <h1>Upload Document</h1>
+      <p>Add a new document to NeoArchiveAI.</p>
+    </div>
+
+    <button
+      type="button"
+      class="secondary-button"
+      (click)="cancel()"
+    >
+      Back to Documents
+    </button>
+
+  </header>
+
+
+  <main class="upload-content">
+
+    <section class="upload-card">
+
+      <form (ngSubmit)="upload()">
+
+        <div class="form-group">
+
+          <label for="title">
+            Title
+          </label>
+
+          <input
+            id="title"
+            type="text"
+            name="title"
+            [(ngModel)]="title"
+            placeholder="Document title"
+          />
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="description">
+            Description
+          </label>
+
+          <textarea
+            id="description"
+            name="description"
+            [(ngModel)]="description"
+            rows="5"
+            placeholder="Document description"
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="categoryId">
+            Category ID
+          </label>
+
+          <input
+            id="categoryId"
+            type="text"
+            name="categoryId"
+            [(ngModel)]="categoryId"
+            placeholder="Category GUID"
+          />
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="file">
+            File
+          </label>
+
+          <input
+            id="file"
+            type="file"
+            (change)="onFileSelected($event)"
+          />
+
+        </div>
+
+
+        @if (selectedFile) {
+
+          <div class="selected-file">
+
+            Selected file:
+
+            <strong>
+              {{ selectedFile.name }}
+            </strong>
+
+          </div>
+
+        }
+
+
+        @if (errorMessage) {
+
+          <div class="error-message">
+            {{ errorMessage }}
+          </div>
+
+        }
+
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="cancel()"
+          >
+            Cancel
+          </button>
+
+
+          <button
+            type="submit"
+            class="primary-button"
+            [disabled]="isUploading"
+          >
+
+            @if (isUploading) {
+              Uploading...
+            } @else {
+              Upload Document
+            }
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+  </main>
+
+</div>

@@ -1,8 +1,13 @@
 export interface Document {
   id: string;
   title: string;
+  description: string;
   fileName: string;
   extension: string;
+  mimeType: string;
   size: number;
-  createdAt: string;
+  storagePath: string;
+  hash: string;
+  categoryId: string;
+  uploadedBy: string;
 }
