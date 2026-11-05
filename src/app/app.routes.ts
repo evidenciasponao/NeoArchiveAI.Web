@@ -19,6 +19,15 @@ export const routes: Routes = [
         .then(m => m.Dashboard)
   },
 
+  // Document Upload - Must be before dynamic :id route
+  {
+    path: 'documents/upload',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/documents/pages/document-upload/document-upload')
+        .then(m => m.DocumentUpload)
+  },
+
   {
     path: 'documents',
     canActivate: [authGuard],

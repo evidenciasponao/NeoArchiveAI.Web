@@ -12,7 +12,7 @@ export class DocumentService {
   private readonly http = inject(HttpClient);
 
   private readonly apiUrl =
-    'http://192.168.1.28:5263/api/Documents';
+    'http://192.168.1.34:5263/api/Documents';
 
   getDocuments(): Observable<Document[]> {
     return this.http.get<Document[]>(this.apiUrl);
