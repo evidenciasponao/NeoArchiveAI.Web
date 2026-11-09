@@ -1,10 +1,11 @@
+
 <section class="document-details-page">
 
   <header class="document-details-header">
 
     <div>
       <h1>Document Details</h1>
-      <p>View information about your document.</p>
+      <p>View and manage your document information.</p>
     </div>
 
     <a
@@ -14,7 +15,6 @@
     </a>
 
   </header>
-
 
   @if (isLoading) {
 
@@ -26,18 +26,23 @@
 
     <article class="document-card">
 
+      @if (successMessage) {
+        <div class="success-message">
+          {{ successMessage }}
+        </div>
+      }
+
+      @if (errorMessage) {
+        <div class="error-message">
+          {{ errorMessage }}
+        </div>
+      }
+
       <div class="document-card-header">
 
         <div>
-
-          <h2>
-            {{ document.title }}
-          </h2>
-
-          <p>
-            {{ document.fileName }}
-          </p>
-
+          <h2>{{ document.title }}</h2>
+          <p>{{ document.fileName }}</p>
         </div>
 
         <span class="document-extension">
@@ -46,143 +51,157 @@
 
       </div>
 
+      @if (isEditing) {
 
-      <div class="document-info-grid">
+        <form
+          class="document-edit-form"
+          (ngSubmit)="saveChanges()">
 
-        <div class="info-item">
+          <h3>Edit Document</h3>
 
-          <span class="info-label">
-            Description
-          </span>
+          <div class="form-group">
 
-          <span class="info-value">
-            {{ document.description }}
-          </span>
+            <label for="title">Title</label>
 
-        </div>
+            <input
+              id="title"
+              type="text"
+              name="title"
+              [(ngModel)]="editTitle"
+              maxlength="200"
+              required
+              [disabled]="isSaving">
 
+          </div>
 
-        <div class="info-item">
+          <div class="form-group">
 
-          <span class="info-label">
-            File name
-          </span>
+            <label for="description">Description</label>
 
-          <span class="info-value">
-            {{ document.fileName }}
-          </span>
+            <textarea
+              id="description"
+              name="description"
+              [(ngModel)]="editDescription"
+              maxlength="1000"
+              rows="4"
+              [disabled]="isSaving">
+            </textarea>
 
-        </div>
+          </div>
 
+          <div class="form-group">
 
-        <div class="info-item">
+            <label for="categoryId">Category ID</label>
 
-          <span class="info-label">
-            Extension
-          </span>
+            <input
+              id="categoryId"
+              type="text"
+              name="categoryId"
+              [(ngModel)]="editCategoryId"
+              required
+              [disabled]="isSaving">
 
-          <span class="info-value">
-            {{ document.extension }}
-          </span>
+          </div>
 
-        </div>
+          <div class="form-actions">
 
+            <button
+              type="submit"
+              class="save-button"
+              [disabled]="isSaving">
 
-        <div class="info-item">
+              {{ isSaving ? 'Saving...' : 'Save Changes' }}
 
-          <span class="info-label">
-            MIME type
-          </span>
+            </button>
 
-          <span class="info-value">
-            {{ document.mimeType }}
-          </span>
+            <button
+              type="button"
+              class="cancel-button"
+              [disabled]="isSaving"
+              (click)="cancelEditing()">
 
-        </div>
+              Cancel
 
+            </button>
 
-        <div class="info-item">
+          </div>
 
-          <span class="info-label">
-            Size
-          </span>
+        </form>
 
-          <span class="info-value">
-            {{ document.size }} bytes
-          </span>
+      } @else {
 
-        </div>
+        <div class="document-actions">
 
+          <button
+            type="button"
+            class="edit-button"
+            (click)="startEditing()">
 
-        <div class="info-item">
+            Edit Document
 
-          <span class="info-label">
-            Category ID
-          </span>
-
-          <span class="info-value">
-            {{ document.categoryId }}
-          </span>
-
-        </div>
-
-
-        <div class="info-item">
-
-          <span class="info-label">
-            Uploaded by
-          </span>
-
-          <span class="info-value">
-            {{ document.uploadedBy }}
-          </span>
-
-        </div>
-
-
-        <div class="info-item">
-
-          <span class="info-label">
-            Document ID
-          </span>
-
-          <span class="info-value document-id">
-            {{ document.id }}
-          </span>
+          </button>
 
         </div>
 
-      </div>
+        <div class="document-info-grid">
 
+          <div class="info-item">
+            <span class="info-label">Description</span>
+            <span class="info-value">{{ document.description }}</span>
+          </div>
 
-      <div class="document-metadata">
+          <div class="info-item">
+            <span class="info-label">File name</span>
+            <span class="info-value">{{ document.fileName }}</span>
+          </div>
 
-        <div>
+          <div class="info-item">
+            <span class="info-label">Extension</span>
+            <span class="info-value">{{ document.extension }}</span>
+          </div>
 
-          <span class="info-label">
-            Storage path
-          </span>
+          <div class="info-item">
+            <span class="info-label">MIME type</span>
+            <span class="info-value">{{ document.mimeType }}</span>
+          </div>
 
-          <span class="metadata-value">
-            {{ document.storagePath }}
-          </span>
+          <div class="info-item">
+            <span class="info-label">Size</span>
+            <span class="info-value">{{ document.size }} bytes</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Category ID</span>
+            <span class="info-value">{{ document.categoryId }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Uploaded by</span>
+            <span class="info-value">{{ document.uploadedBy }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Document ID</span>
+            <span class="info-value document-id">{{ document.id }}</span>
+          </div>
 
         </div>
 
+        <div class="document-metadata">
 
-        <div>
+          <div>
+            <span class="info-label">Storage path</span>
+            <span class="metadata-value">{{ document.storagePath }}</span>
+          </div>
 
-          <span class="info-label">
-            Hash
-          </span>
-
-          <span class="metadata-value">
-            {{ document.hash }}
-          </span>
+          <div>
+            <span class="info-label">Hash</span>
+            <span class="metadata-value">{{ document.hash }}</span>
+          </div>
 
         </div>
 
-      </div>
+      }
 
     </article>
 
@@ -190,17 +209,13 @@
 
     <div class="state-card error-state">
 
-      <h2>
-        Document not found
-      </h2>
+      <h2>Document not found</h2>
 
       <p>
         The requested document could not be loaded.
       </p>
 
-      <a
-        routerLink="/documents"
-        class="back-button">
+      <a routerLink="/documents" class="back-button">
         Back to Documents
       </a>
 
