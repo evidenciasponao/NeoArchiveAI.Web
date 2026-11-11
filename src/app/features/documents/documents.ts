@@ -20,6 +20,7 @@ export class Documents implements OnInit {
   readonly errorMessage = signal('');
   readonly successMessage = signal('');
   readonly deletingDocumentId = signal<string | null>(null);
+  readonly downloadingDocumentId = signal<string | null>(null);
 
   ngOnInit(): void {
     this.loadDocuments();
@@ -44,6 +45,51 @@ export class Documents implements OnInit {
 
         this.isLoading.set(false);
       }
+    });
+  }
+
+  downloadDocument(document: Document): void {
+
+    if (this.downloadingDocumentId() !== null) {
+      return;
+    }
+
+    this.errorMessage.set('');
+    this.successMessage.set('');
+    this.downloadingDocumentId.set(document.id);
+
+    this.documentService.downloadDocument(document.id).subscribe({
+
+      next: blob => {
+        const url = window.URL.createObjectURL(blob);
+        const link = window.document.createElement('a');
+
+        link.href = url;
+        link.download = document.fileName;
+
+        window.document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        window.URL.revokeObjectURL(url);
+
+        this.successMessage.set(
+          'Document downloaded successfully.'
+        );
+
+        this.downloadingDocumentId.set(null);
+      },
+
+      error: error => {
+        console.error('Failed to download document:', error);
+
+        this.errorMessage.set(
+          'Unable to download document.'
+        );
+
+        this.downloadingDocumentId.set(null);
+      }
+
     });
   }
 

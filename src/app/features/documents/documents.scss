@@ -149,37 +149,67 @@
   }
 }
 
-.delete-button {
-  align-self: flex-end;
+.document-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  flex-wrap: wrap;
+  gap: 10px;
 
   margin-top: 20px;
-  padding: 8px 16px;
 
+  button {
+    padding: 8px 16px;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      opacity 0.2s ease;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.download-button {
+  border: 1px solid #1d4ed8;
+
+  background: #172554;
+  color: #93c5fd;
+
+  &:hover:not(:disabled) {
+    background: #1e40af;
+    border-color: #3b82f6;
+    color: #ffffff;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 3px;
+  }
+}
+
+.delete-button {
   border: 1px solid #7f1d1d;
-  border-radius: 6px;
 
   background: #451a1a;
   color: #fca5a5;
-
-  font-size: 13px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    opacity 0.2s ease;
 
   &:hover:not(:disabled) {
     background: #7f1d1d;
     border-color: #ef4444;
     color: #ffffff;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
   }
 
   &:focus-visible {
@@ -243,5 +273,13 @@
   .document-card {
     min-height: 170px;
     padding: 20px;
+  }
+
+  .document-actions {
+    justify-content: stretch;
+
+    button {
+      flex: 1;
+    }
   }
 }

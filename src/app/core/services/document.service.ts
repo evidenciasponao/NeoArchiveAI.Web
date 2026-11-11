@@ -69,4 +69,13 @@ export class DocumentService {
       `${this.apiUrl}/${id}`
     );
   }
+
+  downloadDocument(id: string): Observable<Blob> {
+    return this.http.get(
+      `${this.apiUrl}/${id}/download`,
+      {
+        responseType: 'blob'
+      }
+    );
+  }
 }

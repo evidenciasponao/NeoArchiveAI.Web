@@ -70,18 +70,35 @@
 
           </a>
 
-          <button
-            type="button"
-            class="delete-button"
-            [disabled]="deletingDocumentId() !== null"
-            (click)="deleteDocument(document)"
-          >
-            @if (deletingDocumentId() === document.id) {
-              Deleting...
-            } @else {
-              Delete
-            }
-          </button>
+          <div class="document-actions">
+
+            <button
+              type="button"
+              class="download-button"
+              [disabled]="downloadingDocumentId() !== null"
+              (click)="downloadDocument(document)"
+            >
+              @if (downloadingDocumentId() === document.id) {
+                Downloading...
+              } @else {
+                Download
+              }
+            </button>
+
+            <button
+              type="button"
+              class="delete-button"
+              [disabled]="deletingDocumentId() !== null"
+              (click)="deleteDocument(document)"
+            >
+              @if (deletingDocumentId() === document.id) {
+                Deleting...
+              } @else {
+                Delete
+              }
+            </button>
+
+          </div>
 
         </article>
 
