@@ -1,3 +1,4 @@
+
 <section class="documents-page">
 
   <header class="documents-header">
@@ -16,6 +17,13 @@
 
   </header>
 
+  @if (successMessage()) {
+
+    <div class="state-message success">
+      {{ successMessage() }}
+    </div>
+
+  }
 
   @if (isLoading()) {
 
@@ -41,24 +49,41 @@
 
       @for (document of documents(); track document.id) {
 
-        <a
-          class="document-card"
-          [routerLink]="['/documents', document.id]"
-        >
+        <article class="document-card">
 
-          <h2>
-            {{ document.title }}
-          </h2>
+          <a
+            class="document-card-link"
+            [routerLink]="['/documents', document.id]"
+          >
 
-          <p class="file-name">
-            {{ document.fileName }}
-          </p>
+            <h2>
+              {{ document.title }}
+            </h2>
 
-          <span class="extension">
-            {{ document.extension }}
-          </span>
+            <p class="file-name">
+              {{ document.fileName }}
+            </p>
 
-        </a>
+            <span class="extension">
+              {{ document.extension }}
+            </span>
+
+          </a>
+
+          <button
+            type="button"
+            class="delete-button"
+            [disabled]="deletingDocumentId() !== null"
+            (click)="deleteDocument(document)"
+          >
+            @if (deletingDocumentId() === document.id) {
+              Deleting...
+            } @else {
+              Delete
+            }
+          </button>
+
+        </article>
 
       }
 

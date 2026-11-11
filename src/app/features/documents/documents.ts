@@ -1,3 +1,4 @@
+
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
@@ -17,6 +18,8 @@ export class Documents implements OnInit {
   readonly documents = signal<Document[]>([]);
   readonly isLoading = signal(true);
   readonly errorMessage = signal('');
+  readonly successMessage = signal('');
+  readonly deletingDocumentId = signal<string | null>(null);
 
   ngOnInit(): void {
     this.loadDocuments();
@@ -41,6 +44,51 @@ export class Documents implements OnInit {
 
         this.isLoading.set(false);
       }
+    });
+  }
+
+  deleteDocument(document: Document): void {
+
+    if (this.deletingDocumentId() !== null) {
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `Are you sure you want to delete "${document.title}"?`
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    this.errorMessage.set('');
+    this.successMessage.set('');
+    this.deletingDocumentId.set(document.id);
+
+    this.documentService.deleteDocument(document.id).subscribe({
+
+      next: () => {
+        this.documents.update(documents =>
+          documents.filter(item => item.id !== document.id)
+        );
+
+        this.successMessage.set(
+          'Document deleted successfully.'
+        );
+
+        this.deletingDocumentId.set(null);
+      },
+
+      error: error => {
+        console.error('Failed to delete document:', error);
+
+        this.errorMessage.set(
+          'Unable to delete document.'
+        );
+
+        this.deletingDocumentId.set(null);
+      }
+
     });
   }
 }
